@@ -1,36 +1,30 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
   <!-- Hero Section -->
-  <section class="pt-32 pb-20 bg-indigo-600 overflow-hidden relative">
+  <section class="pt-20 pb-12 bg-cyan-600 overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="text-white">
-          <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Find Your Perfect Job with AI</h2>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Find Your Perfect Job with AI</h2>
           <p class="text-xl mb-8 text-gray-100">WorkHub uses intelligent matching to connect talented professionals with their dream opportunities. Skip the endless scrolling and let AI do the work.</p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#" class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 text-center shadow-lg">Start Job Search</a>
-            <a href="#" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition duration-300 text-center">Post a Job</a>
+            <a href="#" class="bg-white text-cyan-600 px-8 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 text-center shadow-lg">Start Job Search</a>
+            <a href="#" class="border-2 border-white text-white px-8 py-2 rounded-lg font-semibold hover:bg-white hover:text-cyan-600 transition duration-300 text-center">Post a Job</a>
           </div>
         </div>
         <div class="hidden md:block">
-          <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 space-y-4 border border-white border-opacity-20">
+          <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl px-8 py-4 space-y-3 border border-white border-opacity-20">
             <div class="bg-white bg-opacity-20 rounded-lg p-4">
-              <div>
-                <p class="text-white font-semibold">AI Match Found!</p>
-                <p class="text-gray-200 text-sm">Senior Developer at TechCorp</p>
-              </div>
+              <p class="text-white font-semibold">AI Match Found!</p>
+              <p class="text-gray-200 text-sm">Senior Developer at TechCorp</p>
             </div>
             <div class="bg-white bg-opacity-20 rounded-lg p-4">
-              <div>
-                <p class="text-white font-semibold">Instant Application</p>
-                <p class="text-gray-200 text-sm">One-click apply enabled</p>
-              </div>
+              <p class="text-white font-semibold">Instant Application</p>
+              <p class="text-gray-200 text-sm">One-click apply enabled</p>
             </div>
             <div class="bg-white bg-opacity-20 rounded-lg p-4">
-              <div>
-                <p class="text-white font-semibold">Real-time Updates</p>
-                <p class="text-gray-200 text-sm">Track application status</p>
-              </div>
+              <p class="text-white font-semibold">Real-time Updates</p>
+              <p class="text-gray-200 text-sm">Track application status</p>
             </div>
           </div>
         </div>
@@ -38,4 +32,212 @@
     </div>
   </section>
 
+  <!-- Features Section -->
+  <section id="features" class="py-10 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Everything you need to find the perfect job or hire the best talent</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div class="flex justify-between gap-2 mb-4">
+            <div class="bg-gray-100 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 my-auto">AI-Powered Matching</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Our intelligent algorithm analyzes your skills, interests, and experience to recommend the most relevant job opportunities tailored just for you.</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Smart skill matching
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Keyword optimization
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Personalized recommendations
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div class="flex justify-between gap-2 mb-4">
+            <div class="bg-gray-100 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 m-auto">Role-Based Access</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Secure registration and authentication system with customized dashboards for job seekers, recruiters, and administrators.</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Secure authentication
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Multiple user types
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Custom dashboards
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div class="flex justify-between gap-2 mb-4">
+            <div class="bg-gray-100 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 m-auto">Quick Application</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Apply to jobs with a single click. No more lengthy forms or repetitive information entry. Your profile is your application.</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>One-click apply
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>No lengthy forms
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Instant submission
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div class="flex justify-between gap-2 mb-4">
+            <div class="bg-gray-100 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 m-auto">Smart Notifications</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Stay informed with automated email alerts about application status, new job matches, and recruiter responses.</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Real-time updates
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Email notifications
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Status tracking
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div class="flex justify-between gap-2 mb-4">
+            <div class="bg-gray-100 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 m-auto">Quality Screening</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Recruiters receive only relevant applications, reducing screening time and improving hiring efficiency dramatically.</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Pre-qualified candidates
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Reduced screening time
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Better matches
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <div class="flex justify-between gap-2 mb-4">
+            <div class="bg-gray-100 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 m-auto">Secure Platform</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Your data is protected with enterprise-grade security. Safe authentication and encrypted data storage ensure peace of mind.</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Data encryption
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Privacy protection
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>Secure authentication
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-10 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-2">
+        <h2 class="text-4xl font-bold text-gray-900 mb-2">How It Works</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Get started in three simple steps</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Create Your Profile</h3>
+          <p class="text-gray-600">Sign up and build your professional profile with your skills, experience, and career preferences. The more detailed, the better your matches.</p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Get AI Recommendations</h3>
+          <p class="text-gray-600">Our AI analyzes your profile and matches you with relevant opportunities. Browse personalized job recommendations tailored to your goals.</p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Apply Instantly</h3>
+          <p class="text-gray-600">Apply to jobs with one click and track your applications in real-time. Receive notifications when recruiters review your profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
