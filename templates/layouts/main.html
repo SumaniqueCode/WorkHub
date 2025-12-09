@@ -18,43 +18,70 @@
   </head>
   <body class="bg-gray-50">
     {% if messages %}
-      <div id="messages" class="fixed top-20 right-0 transform translate-x-full opacity-0 transition-transform transition-opacity duration-300 ease-out max-w-sm rounded-md p-4 z-50">
+      <div id="messages" class=" fixed shadow-sm top-20 right-2 z-50 space-y-3 max-w-md w-full translate-x-full opacity-0 transition-all duration-500 ease-out">
         {% for message in messages %}
-          {% if message.tags == 'success' %}
-            <div class="px-12 py-3 rounded-xl shadow-lg bg-green-100 border-2 border-green-600 font-semibold text-md">{{ message }}</div>
-          {% elif message.tags == 'error' %}
-            <div class="px-12 py-3 rounded-xl shadow-lg bg-red-100 border-2 border-red-600 font-semibold text-md">{{ message }}</div>
-          {% elif message.tags == 'warning' %}
-            <div class="px-12 py-3 rounded-xl shadow-lg bg-yellow-100 border-2 border-yellow-600">{{ message }}</div>
-          {% else %}
-            <div class="px-12 py-3 rounded-xl shadow-lg bg-gray-100 border-2 border-gray-600 font-semibold text-md">{{ message }}</div>
-          {% endif %}
+          <div class="{% if message.tags == 'success' %}
+              bg-white border-l-4 border-green-500
+            {% elif message.tags == 'error' %}
+              bg-white border-l-4 border-red-500
+            {% elif message.tags == 'warning' %}
+              bg-white border-l-4 border-yellow-500
+            {% else %}
+              bg-white border-l-4 border-blue-500
+            {% endif %} rounded-lg shadow-xl p-4 flex items-start gap-3">
+
+            <div class="flex-shrink-0">
+              {% if message.tags == 'success' %}
+                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+              {% elif message.tags == 'error' %}
+                <i class="fas fa-times-circle text-red-500 text-xl"></i>
+              {% elif message.tags == 'warning' %}
+                <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
+              {% else %}
+                <i class="fas fa-info-circle text-blue-500 text-xl"></i>
+              {% endif %}
+            </div>
+            <div class="flex-1 pt-0.5">
+              <p class="text-md font-semibold text-gray-900">{{ message }}</p>
+            </div>
+            <button type="button" class="flex-shrink-0 ml-auto text-gray-400 hover:text-gray-600 transition-colors" onclick="this.closest('#messages').remove()"><i class="fas fa-times text-lg"></i></button>
+          </div>
         {% endfor %}
       </div>
+            <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const msg = document.getElementById('messages')
+          if (!msg) return
+          requestAnimationFrame(() => {
+            msg.classList.remove('translate-x-full', 'opacity-0')
+            msg.classList.add('translate-x-0', 'opacity-100')
+          })
+          setTimeout(() => {
+            msg.classList.add('opacity-0', 'transition-opacity', 'duration-500')
+            setTimeout(() => msg.remove(), 500)
+          }, 3000)
+        })
+      </script>
     {% endif %}
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white shadow-md border-b-[6px] border-cyan-700 rounded-lg">
       <div class="mx-auto px-4 sm:px-6 lg:px-8 ml-[5%] mr-[2%]">
         <div class="flex justify-between items-center h-16">
-          <a href="/" class="flex items-center gap-2 ">
+          <a href="/" class="flex items-center gap-2">
             <img class="h-10 w-10" src="/media/system_image/logo1.png" alt="Logo" />
             <h1 class="hidden md:block text-2xl font-bold text-cyan-600">WorkHub</h1>
           </a>
           <div class="hidden md:flex items-center space-x-8">
-            <a href="/user/signin" class="text-gray-700 hover:text-cyan-600 transition duration-300">Sign In</a>
+            <a href="/user/login" class="text-gray-700 hover:text-cyan-600 transition duration-300">Sign In</a>
             <a href="/user/register" class="bg-cyan-600 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 transition duration-300">Get Started</a>
           </div>
         </div>
       </div>
     </nav>
-    <!-- Main Content Container -->
     <div class="flex flex-col pt-16 pb-4 min-h-[80vh]">
       {% block content %}
 
       {% endblock %}
     </div>
-
-    <!-- Footer -->
     <footer class="bg-cyan-600 text-white py-6">
       <div class="shadow-lg pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4">
