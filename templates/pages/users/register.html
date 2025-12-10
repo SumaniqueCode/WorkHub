@@ -53,7 +53,7 @@
             <!-- Password Fields -->
             <div class="space-y-2">
               <label for="password1" class="block text-sm font-semibold text-gray-700 normal-case">Password</label>
-              <input class="{{ input_classes }}" type="password1" id="password1" name="password1" />
+              <input class="{{ input_classes }}" type="password" id="password1" name="password1" />
               {% if user_form.errors.password1 %}{% for error in user_form.errors.password1 %}
                 <div class="{{ error_classes }}">{{ error }}</div>
               {% endfor %}{% endif %}

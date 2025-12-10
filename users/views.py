@@ -15,11 +15,12 @@ def register(request):
         profile_form = ProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
+            profile = user.profile
+            for field in profile_form.cleaned_data:
+                setattr(profile, field, profile_form.cleaned_data[field])
             profile.save()
             messages.success(request, "Registration successful")
-            return redirect("/user/signin")
+            return redirect("/user/login")
         else:
             print(user_form.errors)
             print(profile_form.errors)
