@@ -48,7 +48,7 @@
           </div>
         {% endfor %}
       </div>
-            <script>
+      <script>
         window.addEventListener('DOMContentLoaded', () => {
           const msg = document.getElementById('messages')
           if (!msg) return
@@ -70,8 +70,8 @@
             <img class="h-10 w-10" src="/media/system_image/logo1.png" alt="Logo" />
             <h1 class="hidden md:block text-2xl font-bold text-cyan-600">WorkHub</h1>
           </a>
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="/user/login" class="text-gray-700 hover:text-cyan-600 transition duration-300">Sign In</a>
+          <div class="hidden md:flex items-center space-x-4">
+            <a href="/user/login" class=" border-b-2 border-cyan-100 rounded-lg px-6 py-2 hover:shadow-md hover:shadow-cyan-200 text-gray-700 font-semibold hover:text-cyan-600 transition duration-300">LOG IN</a>
             <a href="/user/register" class="bg-cyan-600 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 transition duration-300">Get Started</a>
           </div>
         </div>
