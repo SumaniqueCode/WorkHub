@@ -18,18 +18,57 @@
   </head>
   <body class="bg-gray-50">
     {% if messages %}
-      <div id="messages" class=" fixed shadow-sm top-20 right-2 z-50 space-y-3 max-w-md w-full translate-x-full opacity-0 transition-all duration-500 ease-out">
+      <div id="messages" class="fixed shadow-sm top-20 right-2 z-50 space-y-3 max-w-md w-full translate-x-full opacity-0 transition-all duration-500 ease-out">
         {% for message in messages %}
           <div class="{% if message.tags == 'success' %}
+              
+              
+              
+              
+              
               bg-white border-l-4 border-green-500
-            {% elif message.tags == 'error' %}
-              bg-white border-l-4 border-red-500
-            {% elif message.tags == 'warning' %}
-              bg-white border-l-4 border-yellow-500
-            {% else %}
-              bg-white border-l-4 border-blue-500
-            {% endif %} rounded-lg shadow-xl p-4 flex items-start gap-3">
 
+
+
+
+
+            {% elif message.tags == 'error' %}
+              
+              
+              
+              
+              
+              bg-white border-l-4 border-red-500
+
+
+
+
+
+            {% elif message.tags == 'warning' %}
+              
+              
+              
+              
+              
+              bg-white border-l-4 border-yellow-500
+
+
+
+
+
+            {% else %}
+              
+              
+              
+              
+              
+              bg-white border-l-4 border-blue-500
+
+
+
+
+
+            {% endif %} rounded-lg shadow-xl p-4 flex items-start gap-3">
             <div class="flex-shrink-0">
               {% if message.tags == 'success' %}
                 <i class="fas fa-check-circle text-green-500 text-xl"></i>
@@ -70,10 +109,18 @@
             <img class="h-10 w-10" src="/media/system_image/logo1.png" alt="Logo" />
             <h1 class="hidden md:block text-2xl font-bold text-cyan-600">WorkHub</h1>
           </a>
-          <div class="hidden md:flex items-center space-x-4">
-            <a href="/user/login" class=" border-b-2 border-cyan-100 rounded-lg px-6 py-2 hover:shadow-md hover:shadow-cyan-200 text-gray-700 font-semibold hover:text-cyan-600 transition duration-300">LOG IN</a>
-            <a href="/user/register" class="bg-cyan-600 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 transition duration-300">Get Started</a>
-          </div>
+          {% if request.user.is_authenticated %}
+            <div class="hidden md:flex items-center space-x-2">
+              <a href="/dashboard" class="border-b-2 border-cyan-100 rounded-lg px-6 py-2 hover:shadow-md text-gray-700 font-semibold hover:shadow-cyan-200 hover:text-cyan-600 transition duration-300">Dashboard</a>
+              <a href="/jobs" class="border-b-2 border-cyan-100 rounded-lg px-6 py-2 hover:shadow-md text-gray-700 font-semibold hover:shadow-cyan-200 hover:text-cyan-600 transition duration-300">Jobs</a>
+              <a href="/user/profile" class=""><img src="{{ request.user.profile.profile_image.url }}" alt="{{ user.username }}" class="w-12 h-12 rounded-full border-4 border-white shadow-lg object-cover hover:scale-[1.05] transition duration-300" /></a>
+            </div>
+          {% else %}
+            <div class="hidden md:flex items-center space-x-4">
+              <a href="/user/login" class="border-b-2 border-cyan-100 rounded-lg px-6 py-2 hover:shadow-md hover:shadow-cyan-200 text-gray-700 font-semibold hover:text-cyan-600 transition duration-300">LOG IN</a>
+              <a href="/user/register" class="bg-cyan-600 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 transition duration-300">Get Started</a>
+            </div>
+          {% endif %}
         </div>
       </div>
     </nav>
