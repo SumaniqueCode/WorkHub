@@ -76,7 +76,7 @@ def profile_update(request):
     else:
         user_form = UserRegistrationForm(instance=user)
         profile_form = ProfileForm(instance=profile)
-    return render(request, "pages/users/profile_update.html", {"user_form": user_form, "profile_form": profile_form})
+    return render(request, "pages/users/profile_update.html", {"profile": profile, "user":user, "user_form": user_form, "profile_form": profile_form})
 
 def logoutUser(request):
     logout(request)
