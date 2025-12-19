@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm, ProfileForm
+from .forms import UserRegistrationForm, ProfileForm, UserUpdateForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -66,7 +66,7 @@ def profile_update(request):
     user = request.user
     profile = user.profile
     if request.method == "POST":
-        user_form = UserRegistrationForm(request.POST, instance=user)
+        user_form = UserUpdateForm(request.POST, instance=user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -74,9 +74,9 @@ def profile_update(request):
             messages.success(request, "Profile updated successfully.")
             return redirect("profile")
     else:
-        user_form = UserRegistrationForm(instance=user)
+        user_form = UserUpdateForm(instance=user)
         profile_form = ProfileForm(instance=profile)
-    return render(request, "pages/users/profile_update.html", {"profile": profile, "user":user, "user_form": user_form, "profile_form": profile_form})
+    return render(request, "pages/users/profile_update.html", {"profile": profile, "user": user, "user_form": user_form, "profile_form": profile_form})
 
 def logoutUser(request):
     logout(request)
