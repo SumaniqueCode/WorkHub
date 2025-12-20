@@ -55,7 +55,6 @@ def login_user(request):
             return render(request, 'pages/users/login.html', {'errors': errors}) 
     return render(request, 'pages/users/login.html', {'errors': errors, 'username': username})
 
-
 @login_required(login_url='/users/login')
 def profile_view(request):
     profile = get_object_or_404(Profile, user=request.user)

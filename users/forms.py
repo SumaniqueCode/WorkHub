@@ -40,15 +40,13 @@ class UserUpdateForm(forms.ModelForm):
     username = forms.CharField(required=True, min_length=3, max_length=15)
     first_name = forms.CharField(required=True, min_length=2, max_length=25)
     last_name = forms.CharField(required=True, min_length=2, max_length=25)
-
     class Meta:
         model = User
         fields = ("username", "email", "first_name", "last_name")
-
     def clean_username(self):
         username = self.cleaned_data.get("username")
         qs = User.objects.filter(username=username)
-        if self.instance.pk:  # Exclude current user
+        if self.instance.pk:
             qs = qs.exclude(pk=self.instance.pk)
         if qs.exists():
             raise forms.ValidationError("This username is already taken.")
@@ -57,7 +55,7 @@ class UserUpdateForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get("email")
         qs = User.objects.filter(email=email)
-        if self.instance.pk:  # Exclude current user
+        if self.instance.pk: 
             qs = qs.exclude(pk=self.instance.pk)
         if qs.exists():
             raise forms.ValidationError("This email is already taken.")
