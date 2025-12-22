@@ -76,7 +76,7 @@
                   <img src="{{ request.user.profile.profile_image.url }}" alt="{{ user.username }}" class="w-12 h-12 rounded-full bg-gray-100 border-2 border-white shadow-lg object-cover hover:border-cyan-600 hover:scale-[1.05] transition duration-300 cursor-pointer" />
                   <i id="dropdownArrow" class="fas fa-chevron-down text-gray-600 text-sm transition-transform duration-300"></i>
                 </button>
-                <div id="dropdownMenu" class="hidden absolute top-14 -right-14 mt-2 w-60 bg-white rounded-lg shadow-xl border border-gray-200 py-2">
+                <div id="dropdownMenu"  class="absolute top-14 -right-14 mt-2 w-60 bg-white rounded-lg shadow-xl border border-gray-200 py-2 origin-top scale-y-0 opacity-0 -translate-y-3 transition-all duration-300 ease-out pointer-events-none">
                   <div class="px-4 py-3 border-b border-gray-200">
                     <p class="text-sm font-semibold text-gray-900">{{ request.user.get_full_name|default:request.user.username }}</p>
                     <p class="text-xs text-gray-500 truncate">{{ request.user.email }}</p>
@@ -155,31 +155,79 @@
       </div>
     </footer>
 
-    <script>
-      function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        const arrow = document.getElementById('dropdownArrow');
-        dropdown.classList.toggle('hidden');
-        arrow.classList.toggle('rotate-180');
-      }
-      document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('profileDropdown');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        const arrow = document.getElementById('dropdownArrow');
-        
-        if (dropdown && !dropdown.contains(event.target)) {
-          dropdownMenu.classList.add('hidden');
-          arrow.classList.remove('rotate-180');
-        }
-      });
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-          const dropdownMenu = document.getElementById('dropdownMenu');
-          const arrow = document.getElementById('dropdownArrow');
-          dropdownMenu.classList.add('hidden');
-          arrow.classList.remove('rotate-180');
-        }
-      });
-    </script>
-  </body>
-</html>
+<script>
+  function toggleDropdown() {
+    const dropdown = document.getElementById('dropdownMenu');
+    const arrow = document.getElementById('dropdownArrow');
+    const isOpen = dropdown.classList.contains('scale-y-100');
+    if (isOpen) {
+      dropdown.classList.remove(
+        'scale-y-100',
+        'opacity-100',
+        'translate-y-0',
+        'pointer-events-auto'
+      );
+      dropdown.classList.add(
+        'scale-y-0',
+        'opacity-0',
+        '-translate-y-3',
+        'pointer-events-none'
+      );
+      arrow.classList.remove('rotate-180');
+    } else {
+      dropdown.classList.remove(
+        'scale-y-0',
+        'opacity-0',
+        '-translate-y-3',
+        'pointer-events-none'
+      );
+      dropdown.classList.add(
+        'scale-y-100',
+        'opacity-100',
+        'translate-y-0',
+        'pointer-events-auto'
+      );
+      arrow.classList.add('rotate-180');
+    }
+  }
+  document.addEventListener('click', function (event) {
+    const wrapper = document.getElementById('profileDropdown');
+    const dropdown = document.getElementById('dropdownMenu');
+    const arrow = document.getElementById('dropdownArrow');
+    if (!wrapper.contains(event.target)) {
+      dropdown.classList.remove(
+        'scale-y-100',
+        'opacity-100',
+        'translate-y-0',
+        'pointer-events-auto'
+      );
+      dropdown.classList.add(
+        'scale-y-0',
+        'opacity-0',
+        '-translate-y-3',
+        'pointer-events-none'
+      );
+      arrow.classList.remove('rotate-180');
+    }
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      const dropdown = document.getElementById('dropdownMenu');
+      const arrow = document.getElementById('dropdownArrow');
+
+      dropdown.classList.remove(
+        'scale-y-100',
+        'opacity-100',
+        'translate-y-0',
+        'pointer-events-auto'
+      );
+      dropdown.classList.add(
+        'scale-y-0',
+        'opacity-0',
+        '-translate-y-3',
+        'pointer-events-none'
+      );
+      arrow.classList.remove('rotate-180');
+    }
+  });
+</script>
