@@ -89,21 +89,13 @@
         <div class="lg:col-span-2 space-y-2">
           <div class="bg-white rounded-lg shadow-sm px-6 py-3">
             <h2 class="text-lg font-semibold text-gray-900 mb-4"><i class="fas fa-code mr-2 text-gray-600"></i>Skills</h2>
-            <div id="skills-container" class="flex flex-wrap gap-2"></div>
-            <script>
-              ;(function () {
-                const skillsString = '{{ profile.skills|escapejs }}'
-                if (!skillsString) return
-                const skills = skillsString.split(',').map((skill) => skill.trim()).filter(Boolean)
-                const container = document.getElementById('skills-container')
-                skills.forEach((skill) => {
-                  const span = document.createElement('span')
-                  span.className = 'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200'
-                  span.textContent = skill
-                  container.appendChild(span)
-                })
-              })()
-            </script>
+            <div id="skills-container" class="flex flex-wrap gap-2">
+              {%for skill in profile.skills.all %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200">{{ skill.name }}</span>
+              {% empty %}
+                <p class="text-gray-400 italic">No skills added</p>
+              {% endfor %}
+            </div>
           </div>
           <div class="bg-white rounded-lg shadow-sm px-6 py-3">
             <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
