@@ -85,14 +85,16 @@ def job_create(request):
 def job_update(request, pk):
     job = get_object_or_404(Job, pk=pk, recruiter=request.user)
     if request.method == "POST":
-        form = JobForm(request.POST, instance=job)
+        form = JobForm(request.POST, instance=job, user = request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Job updated successfully.")
             return redirect("/jobs")
     else:
-        form = JobForm(instance=job)
-    return render(request, "pages/jobs/edit_job.html", {"form": form})
+        form = JobForm(instance=job, user=request.user)
+    skills_ids_str = ','.join(str(s.id) for s in job.skills.all())
+    skills = Skill.objects.filter(is_active=True).values("id", "name")
+    return render(request, "pages/jobs/edit_job.html", {"form": form, "job": job, "skills_ids_str": skills_ids_str, "skills": list(skills)})
 
 @login_required(login_url='/users/login')
 def job_delete(request, pk):
