@@ -92,7 +92,7 @@ def job_update(request, pk):
             return redirect("/jobs")
     else:
         form = JobForm(instance=job)
-    return render(request, "pages/jobs/job_create.html", {"form": form})
+    return render(request, "pages/jobs/edit_job.html", {"form": form})
 
 @login_required(login_url='/users/login')
 def job_delete(request, pk):
