@@ -1,17 +1,23 @@
 from django import forms
 from .models import Job
+from companies.models import Company
 
 INPUT_CLASSES = 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent'
 SELECT_CLASSES = 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent'
 TEXTAREA_CLASSES = 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent'
 CHECKBOX_CLASSES = 'w-5 h-5 text-cyan-600 rounded focus:ring-2 focus:ring-cyan-500'
 class JobForm(forms.ModelForm):  
+    company = forms.ModelChoiceField(
+        queryset=Company.objects.none(),
+        widget=forms.Select(attrs={'class': SELECT_CLASSES}),
+        label='Select Company',
+        empty_label='Select your company'
+    )
     class Meta:
         model = Job
-        exclude = ("posted_by", "created_at", "updated_at")
+        exclude = ("recruiter", "posted_by", "created_at", "updated_at")
         widgets = {
             'title': forms.TextInput(attrs={'class': INPUT_CLASSES, 'placeholder': 'e.g., Senior Python Developer' }),
-            'company_name': forms.TextInput(attrs={'class': INPUT_CLASSES, 'placeholder': 'e.g., Tech Corporation' }),
             'location': forms.TextInput(attrs={'class': INPUT_CLASSES, 'placeholder': 'e.g., Kathmandu, Nepal' }),
             'description': forms.Textarea(attrs={'class': TEXTAREA_CLASSES, 'rows': 6, 'placeholder': 'Describe the job role, responsibilities, and requirements...'}),
             'employment_type': forms.Select(attrs={'class': SELECT_CLASSES }),
@@ -20,12 +26,11 @@ class JobForm(forms.ModelForm):
             'vacancies': forms.NumberInput(attrs={'class': INPUT_CLASSES, 'min': 1, 'placeholder': '1'}),
             'salary_min': forms.NumberInput(attrs={'class': INPUT_CLASSES, 'placeholder': 'Minimum salary (optional)'}),
             'salary_max': forms.NumberInput(attrs={'class': INPUT_CLASSES, 'placeholder': 'Maximum salary (optional)'}),
-            'skills': forms.SelectMultiple(attrs={'class': SELECT_CLASSES, 'size': 8 }),
             'is_active': forms.CheckboxInput(attrs={'class': CHECKBOX_CLASSES})
         }
         labels = {
             'title': 'Job Title',
-            'company_name': 'Company Name',
+            'company': 'Select Company',
             'location': 'Location',
             'description': 'Job Description',
             'employment_type': 'Employment Type',
@@ -50,3 +55,9 @@ class JobForm(forms.ModelForm):
             raise forms.ValidationError("Minimum salary cannot exceed maximum salary.")
         
         return cleaned_data
+    
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['company'].queryset = Company.objects.filter(created_by=user)
