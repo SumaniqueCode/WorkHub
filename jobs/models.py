@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from users.models import Skill, Profile
+from users.models import Skill
+from companies.models import Company
 
 class Job(models.Model):
     class EMPLOYMENT_TYPE_CHOICES (models.TextChoices):
@@ -15,7 +16,7 @@ class Job(models.Model):
 
     title = models.CharField(max_length=150)
     description = models.TextField()
-    company_name = models.CharField(max_length=150)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="jobs")
     location = models.CharField(max_length=150)
     recruiter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="jobs_recruited")
     employment_type = models.CharField(max_length=20, choices=EMPLOYMENT_TYPE_CHOICES, default=EMPLOYMENT_TYPE_CHOICES.FullTime )
@@ -25,10 +26,9 @@ class Job(models.Model):
     salary_min = models.PositiveIntegerField( null=True, blank=True )
     salary_max = models.PositiveIntegerField( null=True, blank=True )
     skills = models.ManyToManyField( Skill,  related_name="jobs", blank=True )
-    posted_by = models.ForeignKey( User, on_delete=models.CASCADE, related_name="posted_jobs"  )
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.title} - {self.company_name}"
+        return f"{self.title} - {self.company.name}"
