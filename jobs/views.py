@@ -101,7 +101,7 @@ def job_delete(request, pk):
         job.delete()
         messages.success(request, "Job deleted successfully.")
         return redirect("/jobs")
-    return render(request, "pages/jobs/job_confirm_delete.html", {"job": job})
+    return redirect("/jobs")
 
 @login_required(login_url='/users/login')
 def job_detail(request, pk):
