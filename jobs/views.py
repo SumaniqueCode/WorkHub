@@ -6,7 +6,6 @@ from .forms import JobForm
 from skills.models import Skill
 from django.db.models import Q
 
-@login_required(login_url='/user/login')
 def job_list(request):
     jobs = Job.objects.filter(is_active=True)
     search = request.GET.get('search', '').strip()
@@ -105,7 +104,6 @@ def job_delete(request, pk):
         return redirect("/jobs")
     return redirect("/jobs")
 
-@login_required(login_url='/users/login')
 def job_detail(request, pk):
     job = get_object_or_404(Job, pk=pk)
     return render(request, "pages/jobs/job_detail.html", {"job": job})
