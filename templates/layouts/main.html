@@ -69,7 +69,6 @@
             <img class="h-10 w-10" src="/media/system_image/logo1.png" alt="Logo" />
             <h1 class="hidden md:block text-2xl font-bold text-cyan-600">WorkHub</h1>
           </a>
-          {% if request.user.is_authenticated %}
             <div class="col-span-2 relative">
               <form method="GET" action="/jobs" class="flex items-center">
                 <input type="text" name="search" placeholder="Search jobs..." value="{{ request.GET.search }}" class="w-[100%] pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm" />
@@ -77,6 +76,7 @@
                 <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-cyan-600 text-white text-xs rounded-md hover:bg-cyan-700 transition duration-300">Go</button>
               </form>
             </div>
+          {% if request.user.is_authenticated %}
             <div class="hidden md:flex items-center space-x-8 ms-auto">
               <a href="/dashboard" class="mt-auto flex flex-col space-y-2 items-center text-gray-700 hover:text-cyan-600 transition duration-300">
                 <i class="fa fa-xl fa-home"></i>
