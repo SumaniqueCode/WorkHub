@@ -53,9 +53,21 @@
               </button>
             </form>
           {% else %}
-            <button onclick="applyForJob()" class="px-6 py-2 bg-cyan-600 text-white font-semibold rounded-md hover:bg-cyan-700 transition duration-300 shadow-md hover:shadow-lg">
+          {% if has_applied %}
+          <form method="post" action="{%url 'cancel_application' job.id %}">
+            {% csrf_token %}
+            <button type="submit" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-300 shadow-md hover:shadow-lg">
+              <i class="fas fa-times-circle mr-2"></i>Cancel Application
+            </button>
+          </form>
+          {% else %}
+          <form method="post" action="{%url 'apply_job' job.id %}">
+            {% csrf_token %}
+            <button type="submit" class="px-6 py-2 bg-cyan-600 text-white font-semibold rounded-md hover:bg-cyan-700 transition duration-300 shadow-md hover:shadow-lg">
               <i class="fas fa-paper-plane mr-2"></i>Apply Now
             </button>
+          </form>
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -194,13 +206,6 @@ function copyJobLink() {
   }).catch(err => {
     console.error('Failed to copy:', err);
   });
-}
-
-function applyForJob() {
-  // You can implement your apply logic here
-  // For now, it will redirect to an apply page or show a modal
-  alert('Apply functionality will be implemented here!');
-  // window.location.href = "apply job url";
 }
 </script>
 {% endblock %}
