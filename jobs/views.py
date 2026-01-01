@@ -106,4 +106,8 @@ def job_delete(request, pk):
 
 def job_detail(request, pk):
     job = get_object_or_404(Job, pk=pk)
-    return render(request, "pages/jobs/job_detail.html", {"job": job})
+    has_applied = False
+    if request.user.is_authenticated:
+        has_applied = job.applications.filter(applicant=request.user).exists()
+
+    return render(request, "pages/jobs/job_detail.html", {"job": job, "has_applied": has_applied})
