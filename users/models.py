@@ -18,6 +18,7 @@ class Profile(models.Model):
         Others = "Others", "Others"
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    position = models.CharField(max_length=100, blank=True)
     summary = models.TextField(blank=True)
     address = models.CharField(max_length=50)
     phone = models.CharField( max_length=10)
@@ -49,7 +50,7 @@ class Education(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="educations")
     institution_name = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
-    field_of_study = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=100, blank=True)
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True)
