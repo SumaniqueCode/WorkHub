@@ -14,6 +14,29 @@
       * {
         margin: 0;
       }
+      @media print {
+        @page {
+          size: A4;
+          margin: 10mm;  
+        }
+        body {
+          background: white !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .cv-card {
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          padding: 0 !important;
+                      margin: 0 !important;
+            padding-top: 0 !important;
+        }
+        .avoid-break {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+      }
     </style>
   </head>
   <body class="bg-gray-50">
@@ -62,7 +85,7 @@
         })
       </script>
     {% endif %}
-    <nav class="fixed w-full z-50 bg-white shadow-md border-b-[6px] border-cyan-700 rounded-lg">
+    <nav class="fixed w-full z-50 bg-white shadow-md border-b-[6px] border-cyan-700 rounded-lg no-print">
       <div class="mx-auto px-4 sm:px-6 lg:px-8 ml-[5%] mr-[5%]">
         <div class="grid grid-cols-4 space-x-4 items-center h-16">
           <a href="/" class="flex items-center gap-2">
@@ -129,7 +152,7 @@
 
       {% endblock %}
     </div>
-    <footer class="bg-cyan-600 text-white py-6">
+    <footer class="bg-cyan-600 text-white py-6 no-print">
       <div class="shadow-lg pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="mx-auto">
@@ -178,13 +201,11 @@
     </footer>
 
     <script>
-      // Dropdown toggle function
       function toggleDropdown() {
         const dropdown = document.getElementById('dropdownMenu')
         const arrow = document.getElementById('dropdownArrow')
       
         if (dropdown.classList.contains('hidden')) {
-          // Show dropdown with animation
           dropdown.classList.remove('hidden')
           setTimeout(() => {
             dropdown.classList.remove('opacity-0', 'scale-95')
@@ -192,7 +213,6 @@
           }, 10)
           arrow.classList.add('rotate-180')
         } else {
-          // Hide dropdown with animation
           dropdown.classList.remove('opacity-100', 'scale-100')
           dropdown.classList.add('opacity-0', 'scale-95')
           setTimeout(() => {
@@ -201,8 +221,6 @@
           arrow.classList.remove('rotate-180')
         }
       }
-      
-      // Close dropdown when clicking outside
       document.addEventListener('click', function (event) {
         const dropdownContainer = document.getElementById('profileDropdown')
         const dropdownMenu = document.getElementById('dropdownMenu')
@@ -220,7 +238,6 @@
         }
       })
       
-      // Close dropdown when pressing Escape key
       document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') {
           const dropdownMenu = document.getElementById('dropdownMenu')
