@@ -8,6 +8,7 @@ urlpatterns = [
     path("profile/", profile_view, name="profile"),
     path("profile/edit/", profile_update, name="profile-update"),
     path("logout", logoutUser, name="logout"),
+    path("skills/add/", add_skill, name="add-skills"),
     path("experience/add/", add_or_edit_experience, name="add-experience"),
     path("experience/<int:id>/edit/", add_or_edit_experience, name="edit-experience"),
     path("education/add/", add_or_edit_education, name="add-education"),
