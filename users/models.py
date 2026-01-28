@@ -78,7 +78,7 @@ class SocialLink(models.Model):
     def __str__(self):
         return f"{self.platform} link for {self.profile.user.username}"
 
-class Projects(models.Model):
+class Project(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="projects")
     title = models.CharField(max_length=100)
     description = models.TextField()

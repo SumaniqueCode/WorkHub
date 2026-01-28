@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.files.uploadedfile import UploadedFile
-from .models import Profile, Experience, Education, Certification, SocialLink, Projects
+from .models import Profile, Experience, Education, Certification, SocialLink, Project
 
 # --- Tailwind classes for consistency ---
 INPUT_CLASSES = 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent'
@@ -116,7 +116,7 @@ class SocialLinkForm(forms.ModelForm):
 
 class ProjectForm(forms.ModelForm):
     class Meta:
-        model = Projects
+        model = Project
         fields = ("title", "description", "project_url")
         widgets = {
             "title": forms.TextInput(attrs={"class": INPUT_CLASSES}),
