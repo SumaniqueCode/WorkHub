@@ -15,7 +15,7 @@ class SocialLinkInline(admin.StackedInline):
     model = SocialLink
     extra = 1
 class ProjectInline(admin.StackedInline):
-    model = Projects
+    model = Project
     extra = 1
 
 class ProfileAdmin(admin.ModelAdmin):
