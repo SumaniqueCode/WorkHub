@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from skills.models import Skill
-from .models import Profile
+from .models import Profile, Experience, Education, Certification, SocialLink, Project
 from .forms import *
 from .utils import calculate_total_experience
 
@@ -119,7 +119,7 @@ def add_or_edit_experience(request, id=None):
             exp = form.save(commit=False)
             exp.profile = profile
             exp.save()
-            messages.success(  request,  ( "Experience updated successfully." if id else "Experience added successfully."  ))
+            messages.success( request,  ("Experience updated successfully." if id else "Experience added successfully."  ))
             return redirect("profile")
     else:
         form = ExperienceForm(instance=experience)
@@ -170,7 +170,7 @@ def add_or_edit_certification(request, id=None):
             cert = form.save(commit=False)
             cert.profile = profile
             cert.save()
-            messages.success( request, ( "Certification updated successfully." if id else "Certification added successfully." ))
+            messages.success(request, ("Certification updated successfully." if id else "Certification added successfully." ))
             return redirect("profile")
     else:
         form = CertificationForm(instance=certification)
@@ -178,7 +178,7 @@ def add_or_edit_certification(request, id=None):
     return render( request, "pages/users/profile_form.html", {
             "form": form,
             "page_title": "Edit Certification" if id else "Add Certification",
-            "page_subtitle": ( "Update your professional certifications." if id else "Add your professional certifications.")
+            "page_subtitle": ("Update your professional certifications." if id else "Add your professional certifications.")
             })
 
 
@@ -196,7 +196,7 @@ def add_or_edit_social_link(request, id=None):
             link = form.save(commit=False)
             link.profile = profile
             link.save()
-            messages.success( request, ( "Social link updated successfully." if id else "Social link added successfully." ))
+            messages.success( request, ("Social link updated successfully." if id else "Social link added successfully." ))
             return redirect("profile")
     else:
         form = SocialLinkForm(instance=social_link)
@@ -204,7 +204,7 @@ def add_or_edit_social_link(request, id=None):
     return render(request, "pages/users/profile_form.html",  {
             "form": form,
             "page_title": "Edit Social Link" if id else "Add Social Link",
-            "page_subtitle": (  "Update your social or professional links."  if id  else "Add your social or professional links.")
+            "page_subtitle": ("Update your social or professional links."  if id  else "Add your social or professional links.")
         })
 
 
@@ -233,6 +233,46 @@ def add_or_edit_project(request, id=None):
             "page_subtitle": ("Update your project details." if id else "Add your personal or professional projects.")
         })
 
+
+@login_required(login_url="/users/login")
+def delete_experience(request, id):
+    profile = request.user.profile
+    experience = get_object_or_404(Experience, id=id, profile=profile)
+    experience.delete()
+    messages.success(request, "Experience deleted successfully.")
+    return redirect("profile")
+
+@login_required(login_url="/users/login")
+def delete_education(request, id):
+    profile = request.user.profile
+    education = get_object_or_404(Education, id=id, profile=profile)
+    education.delete()
+    messages.success(request, "Education deleted successfully.")
+    return redirect("profile")
+
+@login_required(login_url="/users/login")
+def delete_certification(request, id):
+    profile = request.user.profile
+    certification = get_object_or_404(Certification, id=id, profile=profile)
+    certification.delete()
+    messages.success(request, "Certification deleted successfully.")
+    return redirect("profile")
+
+@login_required(login_url="/users/login")
+def delete_social_link(request, id):
+    profile = request.user.profile
+    social_link = get_object_or_404(SocialLink, id=id, profile=profile)
+    social_link.delete()
+    messages.success(request, "Social link deleted successfully.")
+    return redirect("profile")
+
+@login_required(login_url="/users/login")
+def delete_project(request, id):
+    profile = request.user.profile
+    project = get_object_or_404(Project, id=id, profile=profile)
+    project.delete()
+    messages.success(request, "Project deleted successfully.")
+    return redirect("profile")
 
 @login_required(login_url="/users/login")
 def view_resume(request, profile_id):
