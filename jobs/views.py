@@ -1,3 +1,4 @@
+from datetime import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -59,14 +60,14 @@ def job_list(request):
     else:  
         jobs = jobs.order_by('-created_at')
     jobs = jobs.select_related('recruiter').prefetch_related('skills')
-    return render(request, "pages/jobs/job_list.html", {'jobs': jobs})
+    return render(request, "pages/jobs/job_list.html", {'jobs': jobs, 'employment_type_choices': Job.EMPLOYMENT_TYPE_CHOICES, 'work_mode_choices': Job.WORK_MODE_CHOICES})
 
 @login_required(login_url='/users/login')
 def job_create(request):
     if request.method == "POST":
         form = JobForm(request.POST, user=request.user)
-        skills_ids = request.POST.get("skills", "")
-        skills_ids = [int(i) for i in skills_ids.split(",") if i.isdigit()]
+        skills_str = request.POST.get("skills", "")
+        skills_ids = [int(x) for x in skills_str.split(",") if x.isdigit()]
         if form.is_valid():
             job = form.save(commit=False)
             job.recruiter = request.user
@@ -85,8 +86,12 @@ def job_update(request, pk):
     job = get_object_or_404(Job, pk=pk, recruiter=request.user)
     if request.method == "POST":
         form = JobForm(request.POST, instance=job, user = request.user)
+        skills_str = request.POST.get("skills", "")
+        skills_ids = [int(x) for x in skills_str.split(",") if x.isdigit()]
         if form.is_valid():
             form.save()
+            if skills_ids:
+                job.skills.set(Skill.objects.filter(id__in=skills_ids))
             messages.success(request, "Job updated successfully.")
             return redirect("/jobs")
     else:
@@ -107,7 +112,71 @@ def job_delete(request, pk):
 def job_detail(request, pk):
     job = get_object_or_404(Job, pk=pk)
     has_applied = False
+    profile = None
+    profile_comparison = {}
+
     if request.user.is_authenticated:
         has_applied = job.applications.filter(applicant=request.user).exists()
+        try:
+            profile = request.user.profile
+            # Compare skills
+            job_skills = set(job.skills.values_list('name', flat=True))
+            user_skills = set(profile.skills.values_list('name', flat=True))
+            matching_skills = job_skills & user_skills
+            missing_skills = job_skills - user_skills
+            profile_comparison['skills'] = {
+                'required': sorted(job_skills),
+                'user_has': sorted(user_skills),
+                'matching': matching_skills,
+                'missing': missing_skills,
+                'sufficient': len(missing_skills) == 0
+            }
+            # Compare experience
+            user_experience_years = 0
+            for exp in profile.experiences.all():
+                if exp.end_date:
+                    duration = (exp.end_date - exp.start_date).days / 365.25
+                else:
+                    duration = (timezone.now().date() - exp.start_date).days / 365.25
+                user_experience_years += duration
+            profile_comparison['experience'] = {
+                'required': job.min_experience,
+                'user_has': round(user_experience_years, 1),
+                'sufficient': user_experience_years >= job.min_experience
+            }
+            # Compare preferred job type
+            profile_comparison['preferred_job_type'] = {
+                'required': job.get_employment_type_display(),
+                'user_has': profile.preferred_job_type,
+                'sufficient': profile.preferred_job_type.lower() == job.get_employment_type_display().lower() if profile.preferred_job_type else False
+            }
 
-    return render(request, "pages/jobs/job_detail.html", {"job": job, "has_applied": has_applied})
+            # Compare preferred location (only if job is not remote)
+            if job.work_mode != 'remote':
+                profile_comparison['preferred_location'] = {
+                    'required': job.location,
+                    'user_has': profile.preferred_location,
+                    'sufficient': profile.preferred_location and profile.preferred_location.lower() == job.location.lower()
+                }
+            else:
+                profile_comparison['preferred_location'] = {
+                    'required': 'Remote',
+                    'user_has': profile.preferred_location,
+                    'sufficient': True  # Remote jobs don't require location match
+                }
+
+            # Compare preferred work mode
+            profile_comparison['preferred_work_mode'] = {
+                'required': job.get_work_mode_display(),
+                'user_has': profile.preferred_work_mode,
+                'sufficient': profile.preferred_work_mode.lower() == job.get_work_mode_display().lower() if profile.preferred_work_mode else False
+            }
+        except:
+            pass  # User might not have a profile
+
+    return render(request, "pages/jobs/job_detail.html", {
+        "job": job,
+        "has_applied": has_applied,
+        "profile": profile,
+        "profile_comparison": profile_comparison
+    })
