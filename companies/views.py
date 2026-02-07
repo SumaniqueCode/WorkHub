@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import CompanyForm
 from .models import Company
+from jobs.models import Job
 
 def company_list(request):
     companies = Company.objects.all().filter(created_by = request.user) .order_by('-created_at')
-    return render(request, "pages/companies/company_list.html", {"companies": companies})
+    jobs = Job.objects.filter(recruiter=request.user).order_by('-created_at')
+    tab = request.GET.get('tab', 'companies')
+    return render(request, "pages/companies/company_list.html", {"companies": companies, "jobs": jobs, "tab": tab})
 
 @login_required(login_url='/users/login')
 def create_company(request):
