@@ -328,7 +328,7 @@
                     <a href="{{ link.url }}" target="_blank" class="px-3 py-1 rounded-full text-sm bg-green-50 text-green-700 border border-green-200">{{ link.platform }}</a>
                     <div class="flex gap-2">
                       <a href="/user/social-links/{{ link.id }}/edit" class="text-gray-400 hover:text-cyan-600"><i class="fas fa-pen text-xs"></i></a>
-                      <button onclick="openDeleteDialog('Delete Social Link', '/user/social-links/{{ link.id }}/delete/')" class="text-gray-400 hover:text-red-600" title="Delete social link"><i class="fas fa-trash text-xs"></i></button>
+                      <button onclick="openDeleteDialog('Delete Social Link', '{{link.platform}}', '/user/social-links/{{ link.id }}/delete/')" class="text-gray-400 hover:text-red-600" title="Delete social link"><i class="fas fa-trash text-xs"></i></button>
                     </div>
                   </div>
                 {% endfor %}
