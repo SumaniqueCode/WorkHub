@@ -52,7 +52,7 @@ def login_user(request):
             return render(request, "pages/users/login.html", {"errors": errors})
 
     return render(
-        request, "pages/user/login.html", {"errors": errors, "username": username}
+        request, "pages/users/login.html", {"errors": errors, "username": username}
     )
 
 
