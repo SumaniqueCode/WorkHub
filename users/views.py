@@ -87,6 +87,8 @@ def profile_update(request):
             profile.save()
             messages.success(request, "Profile updated successfully.")
             return redirect("profile")
+        else:
+            return render( request,"pages/users/profile_update.html", {"profile_form": profile_form, "user_form": user_form,"profile": profile})
     else:
         profile_form = ProfileForm(instance=profile)
         user_form = UserUpdateForm(instance=user)
