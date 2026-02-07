@@ -4,14 +4,14 @@ from django.contrib import messages
 from jobs.models import Job
 from .models import Application
 
-@login_required(login_url="/users/login/")
+@login_required(login_url="/user/login/")
 def application_list(request):
     user = request.user
     jobs_applied = Application.objects.filter(applicant=user).select_related('job').order_by('-applied_at')
     jobs = [application.job for application in jobs_applied]
     return render(request, "pages/jobs/job_list.html", {"jobs": jobs})
 
-@login_required(login_url="/users/login/")
+@login_required(login_url="/user/login/")
 def apply_job(request, job_id):
     job = get_object_or_404(Job, id=job_id)
     if request.method == "POST":
@@ -35,7 +35,7 @@ def apply_job(request, job_id):
     return redirect(f"/jobs/{job.id}")
     
 
-@login_required(login_url="/users/login/")
+@login_required(login_url="/user/login/")
 def cancel_application(request, job_id):
     job = get_object_or_404(Job, id=job_id)
     if request.method == "POST":
@@ -51,7 +51,7 @@ def cancel_application(request, job_id):
     return redirect(f"/jobs/{job.id}")
 
 
-@login_required(login_url="/users/login/")
+@login_required(login_url="/user/login/")
 def change_application_status(request, application_id):
     if request.method == "POST":
         application = get_object_or_404(Application, id=application_id)

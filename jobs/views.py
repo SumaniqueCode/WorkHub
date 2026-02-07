@@ -70,7 +70,7 @@ def job_list(request):
         job.application_status = application_statuses.get(job.id, None)
     return render(request, "pages/jobs/job_list.html", {'jobs': jobs, 'employment_type_choices': Job.EMPLOYMENT_TYPE_CHOICES, 'work_mode_choices': Job.WORK_MODE_CHOICES})
 
-@login_required(login_url='/users/login')
+@login_required(login_url='/user/login')
 def job_create(request):
     if request.method == "POST":
         form = JobForm(request.POST, user=request.user)
@@ -89,7 +89,7 @@ def job_create(request):
     skills = Skill.objects.filter(is_active=True).values("id", "name")
     return render(request, "pages/jobs/create_job.html", {"form": form,"skills": list(skills)})
 
-@login_required(login_url='/users/login')
+@login_required(login_url='/user/login')
 def job_update(request, pk):
     job = get_object_or_404(Job, pk=pk, recruiter=request.user)
     if request.method == "POST":
@@ -108,7 +108,7 @@ def job_update(request, pk):
     skills = Skill.objects.filter(is_active=True).values("id", "name")
     return render(request, "pages/jobs/edit_job.html", {"form": form, "job": job, "skills_ids_str": skills_ids_str, "skills": list(skills)})
 
-@login_required(login_url='/users/login')
+@login_required(login_url='/user/login')
 def job_delete(request, pk):
     job = get_object_or_404(Job, pk=pk, recruiter=request.user)
     if request.method == "POST":
@@ -199,7 +199,7 @@ def job_detail(request, pk):
     })
 
 
-@login_required(login_url="/users/login/")
+@login_required(login_url="/user/login/")
 def job_applications(request, pk):
     job = get_object_or_404(Job, pk=pk)
     user = request.user

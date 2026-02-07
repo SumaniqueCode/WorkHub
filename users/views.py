@@ -18,7 +18,7 @@ def register(request):
         if user_form.is_valid():
             user = user_form.save()
             messages.success( request, "Registration successful. Please login to complete your profile." )
-            return redirect("/users/login")
+            return redirect("/user/login")
     else:
         user_form = UserRegistrationForm()
     return render(request, "pages/users/register.html", {"user_form": user_form})
@@ -52,7 +52,7 @@ def login_user(request):
             return render(request, "pages/users/login.html", {"errors": errors})
 
     return render(
-        request, "pages/users/login.html", {"errors": errors, "username": username}
+        request, "pages/user/login.html", {"errors": errors, "username": username}
     )
 
 
@@ -62,7 +62,7 @@ def logoutUser(request):
     return redirect("/")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def profile_view(request):
     profile = get_object_or_404(Profile, user=request.user)
     skills = Skill.objects.filter(is_active=True).values("id", "name")
@@ -71,7 +71,7 @@ def profile_view(request):
     return render(  request, "pages/users/profile.html", { "profile": profile, "experience_duration": experience_duration, "skills_ids_str": skills_ids_str, "skills": list(skills)})
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def profile_update(request):
     user = request.user
     profile = user.profile
@@ -93,7 +93,7 @@ def profile_update(request):
         return render( request, "pages/users/profile_update.html", { "profile_form": profile_form, "user_form": user_form, "profile": profile })
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def add_skill(request):
     profile = request.user.profile
     if request.method == "POST":
@@ -105,7 +105,7 @@ def add_skill(request):
     else:
         return redirect("profile")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def add_or_edit_experience(request, id=None):
     profile = request.user.profile
     experience = None
@@ -130,7 +130,7 @@ def add_or_edit_experience(request, id=None):
             "page_subtitle": ( "Update your work experience details." if id else "Add your work experience details." )
             })
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def add_or_edit_education(request, id=None):
     profile = request.user.profile
     education = None
@@ -156,7 +156,7 @@ def add_or_edit_education(request, id=None):
             })
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def add_or_edit_certification(request, id=None):
     profile = request.user.profile
     certification = None
@@ -182,7 +182,7 @@ def add_or_edit_certification(request, id=None):
             })
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def add_or_edit_social_link(request, id=None):
     profile = request.user.profile
     social_link = None
@@ -208,7 +208,7 @@ def add_or_edit_social_link(request, id=None):
         })
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def add_or_edit_project(request, id=None):
     profile = request.user.profile
     project = None
@@ -234,7 +234,7 @@ def add_or_edit_project(request, id=None):
         })
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def delete_experience(request, id):
     profile = request.user.profile
     experience = get_object_or_404(Experience, id=id, profile=profile)
@@ -242,7 +242,7 @@ def delete_experience(request, id):
     messages.success(request, "Experience deleted successfully.")
     return redirect("profile")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def delete_education(request, id):
     profile = request.user.profile
     education = get_object_or_404(Education, id=id, profile=profile)
@@ -250,7 +250,7 @@ def delete_education(request, id):
     messages.success(request, "Education deleted successfully.")
     return redirect("profile")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def delete_certification(request, id):
     profile = request.user.profile
     certification = get_object_or_404(Certification, id=id, profile=profile)
@@ -258,7 +258,7 @@ def delete_certification(request, id):
     messages.success(request, "Certification deleted successfully.")
     return redirect("profile")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def delete_social_link(request, id):
     profile = request.user.profile
     social_link = get_object_or_404(SocialLink, id=id, profile=profile)
@@ -266,7 +266,7 @@ def delete_social_link(request, id):
     messages.success(request, "Social link deleted successfully.")
     return redirect("profile")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def delete_project(request, id):
     profile = request.user.profile
     project = get_object_or_404(Project, id=id, profile=profile)
@@ -274,7 +274,7 @@ def delete_project(request, id):
     messages.success(request, "Project deleted successfully.")
     return redirect("profile")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/user/login")
 def view_resume(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     user = profile.user
