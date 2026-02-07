@@ -277,5 +277,6 @@ def delete_project(request, id):
 @login_required(login_url="/users/login")
 def view_resume(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
+    user = profile.user
     experience_duration = calculate_total_experience(profile.experiences.all())
-    return render( request, "pages/users/resume.html", {"profile": profile, "experience_duration": experience_duration})
+    return render( request, "pages/users/resume.html", {"user":user, "profile": profile, "experience_duration": experience_duration})
