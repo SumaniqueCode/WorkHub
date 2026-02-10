@@ -9,6 +9,11 @@ from .forms import *
 from .utils import calculate_total_experience
 
 
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from .forms import UserRegistrationForm
+
 def register(request):
     if request.user.is_authenticated:
         return redirect("/dashboard")
@@ -17,8 +22,18 @@ def register(request):
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
             user = user_form.save()
-            messages.success( request, "Registration successful. Please login to complete your profile." )
-            return redirect("/user/login")
+
+            # Authenticate and log in the user immediately
+            username = user_form.cleaned_data.get("username")
+            password = user_form.cleaned_data.get("password1")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Registration successful. You are now logged in.")
+                return redirect("/dashboard")
+            else:
+                messages.error(request, "Something went wrong. Please log in manually.")
+                return redirect("/user/login")
     else:
         user_form = UserRegistrationForm()
     return render(request, "pages/users/register.html", {"user_form": user_form})
