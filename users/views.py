@@ -7,12 +7,8 @@ from skills.models import Skill
 from .models import Profile, Experience, Education, Certification, SocialLink, Project
 from .forms import *
 from .utils import calculate_total_experience
-
-
-from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from .forms import UserRegistrationForm
 
 def register(request):
     if request.user.is_authenticated:
