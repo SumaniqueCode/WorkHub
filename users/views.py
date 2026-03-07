@@ -458,9 +458,8 @@ def forgot_password(request):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            # Don't reveal if email exists or not for security
-            messages.success(request, "You will receive verification code if account exists.")
-            return redirect("/user/forgot-password")
+            errors["email"] = "No account found with this email address."
+            return render(request, "pages/users/password_reset.html", {"errors": errors})
         
         # Check if user is active
         if not user.is_active:
