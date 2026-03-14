@@ -4,7 +4,8 @@ import django
 
 # Setup Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
-sys.path.insert(0, 'c:/Users/acer/OneDrive/Desktop/Working/FYP/workhub')
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
 django.setup()
 
 from skills.models import Skill
