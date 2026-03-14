@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'companies',
     'applications',
     'notifications',
+    'sklearn',
 ]
 
 MIDDLEWARE = [
