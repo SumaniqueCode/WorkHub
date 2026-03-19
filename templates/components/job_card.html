@@ -94,7 +94,7 @@
                                     {% if job.skills.count > 2 %}
                                         <span 
                                         title="{% for skill in job.skills.all %}{% if forloop.counter > 2 %}{{ skill.name }}{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %}"
-                                        class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
+                                        class="border-2 border-cyan-700 px-2 py-0.5 bg-white text-gray-600 text-xs font-medium rounded-full">
                                             +{{ job.skills.count|add:'-2' }} more
                                         </span>
                                     {% endif %}
