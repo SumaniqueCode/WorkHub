@@ -77,7 +77,7 @@ UNFOLD = {
                         ],
                     },
                     {
-                        "title": "Candidate Applications",
+                        "title": "Job Applications",
                         "link": reverse_lazy("admin:applications_application_changelist"),
                         "icon": "assignment_ind",
                     },
@@ -124,70 +124,6 @@ UNFOLD = {
         ],
     },
     "STYLES": [
-        """
-        /* Show brand text next to the logo in the admin sidebar/header */
-        aside a[href='/admin/'],
-        header a[href='/admin/'] {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 0.75rem !important;
-        }
-
-        aside a[href='/admin/']::after,
-        header a[href='/admin/']::after {
-            content: "WorkHub Admin";
-            font-size: 1rem;
-            font-weight: 700;
-            color: rgb(15 23 42);
-            white-space: nowrap;
-        }
-
-        /* Make sidebar and changelist search inputs use the full available width */
-        aside form,
-        aside form > div,
-        aside form input[type='search'],
-        aside form input[type='text'] {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
-
-        .unfold-table-controls,
-        .unfold-table-controls form,
-        .unfold-table-controls form > div,
-        .unfold-table-controls input[type='search'],
-        .unfold-table-controls input[type='text'] {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
-
-        /* Turn the floating add icon into a proper labeled action button */
-        .unfold-header a[href$='/add/'].bg-primary-600 {
-            border-radius: 0.5rem !important;
-            padding: 0 1rem !important;
-            width: auto !important;
-            min-width: 6rem !important;
-            height: 2.5rem !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 0.35rem !important;
-            white-space: nowrap !important;
-        }
-
-        .unfold-header a[href$='/add/'] svg,
-        .unfold-header a[href$='/add/'] span {
-            flex-shrink: 0;
-        }
-
-        /* Page-specific labels for the add action */
-        .model-job .unfold-header a[href$='/add/']::after { content: " Add Job"; }
-        .model-company .unfold-header a[href$='/add/']::after { content: " Add Company"; }
-        .model-profile .unfold-header a[href$='/add/']::after { content: " Add Profile"; }
-        .model-user .unfold-header a[href$='/add/']::after { content: " Add User"; }
-        .model-skill .unfold-header a[href$='/add/']::after { content: " Add Skill"; }
-        .model-application .unfold-header a[href$='/add/']::after { content: " Add Application"; }
-        .model-usernotification .unfold-header a[href$='/add/']::after { content: " Add Notification"; }
-        .model-verificationcode .unfold-header a[href$='/add/']::after { content: " Add Code"; }
-        """
+        "/static/admin/css/unfold-custom.css",
     ],
 }
