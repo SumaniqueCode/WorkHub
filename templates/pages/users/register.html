@@ -73,7 +73,7 @@
             <div class="flex items-center space-x-2 py-2">
               <input type="checkbox" name="agree_terms" id="agree_terms" class="w-4 h-4 text-cyan-600 border-gray-300 rounded focus:ring-cyan-500" required>
               <label for="agree_terms" class="text-sm text-gray-600 normal-case">
-                I agree to the <a href="#" class="text-cyan-600 hover:underline">Terms and Conditions</a>
+                I agree to the <a href="{% url 'terms' %}" target="_blank" class="text-cyan-600 hover:underline">Terms and Conditions</a>
               </label>
               {% if user_form.errors.agree_terms %}
                 <span class="{{ error_classes }} block">{{ user_form.errors.agree_terms }}</span>
@@ -84,10 +84,10 @@
           </div>
         </form>
 
-        <div class="mt-6 flex items-center justify-between">
-          <span class="border-b w-1/5 lg:w-1/4"></span>
-          <a href="#" class="text-xs text-center text-gray-500 uppercase">or signup with</a>
-          <span class="border-b w-1/5 lg:w-1/4"></span>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="border-b w-2/5 lg:w-2/4"></span>
+          <a href="#" class="text-xs text-center text-gray-500 uppercase mx-2">or</a>
+          <span class="border-b w-2/5 lg:w-2/4"></span>
         </div>
 
         <div class="mt-4">
