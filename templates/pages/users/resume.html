@@ -80,7 +80,7 @@
             <h2 class="text-lg font-semibold border-b border-gray-400 pb-1 mb-2">Skills</h2>
             <div class="text-sm flex gap-2 mx-2">
               {% for skill in profile.skills.all %}
-                <span class="inline-flex items-center px-2 rounded-full text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200">{{ skill.name }}{% if not forloop.last %} {% endif %}</span>
+                <span class="inline-flex items-center px-2 rounded-full text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200 whitespace-nowrap">{{ skill.name }}{% if not forloop.last %} {% endif %}</span>
               {% endfor %}
             </div>
           </div>

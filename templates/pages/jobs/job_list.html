@@ -10,7 +10,7 @@
       <div class="flex items-center gap-3">
         <div class="relative" id="filtersDropdown">
           <button type="button" onclick="toggleFiltersDropdown()" 
-                  class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
             <i class="fas fa-filter text-cyan-600"></i>
             <span>Filters</span>
             <span id="activeFiltersCount" class="text-xs text-gray-500"></span>
@@ -73,7 +73,7 @@
         </div>
 
         <div class="relative" id="sortDropdown">
-          <button type="button" onclick="toggleSortDropdown()" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+          <button type="button" onclick="toggleSortDropdown()" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-xl shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
             <i class="fas fa-sort text-cyan-600"></i>
             <span>Sort</span>
             <i id="sortArrow" class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
@@ -106,7 +106,7 @@
         </div>
 
         {% if user.profile.role == 'Recruiter' and user.companies_created.exists %}
-          <a href="{% url 'job_create' %}" class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-600 hover:bg-cyan-700 transition duration-300">
+          <a href="{% url 'job_create' %}" class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-cyan-600 hover:bg-cyan-700 transition duration-300">
             <i class="fas fa-plus mr-2"></i>
             Post Job
           </a>
